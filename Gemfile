@@ -38,7 +38,7 @@ gem "devise"
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -50,6 +50,18 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
   gem "dotenv-rails"
+  gem "annotate"
+  gem "rspec-rails"
+  gem "ffaker"
+  gem "factory_bot_rails"
+  gem "rubycritic"
+  gem "rubocop"
+  gem "solargraph"
+  gem "rails_best_practices"
+  gem "bullet"
+  gem "pry-rails"
+  gem "pry-byebug"
+  gem "super_awesome_print"
 end
 
 group :development do

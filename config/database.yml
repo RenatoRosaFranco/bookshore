@@ -1,50 +1,42 @@
-# PostgreSQL. Versions 9.3 and up are supported.
-#
-# Install the pg driver:
-#   gem install pg
-# On macOS with Homebrew:
-#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
-# On Windows:
-#   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
-#
-# Configure Using Gemfile
-# gem "pg"
-#
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
 
 development:
   <<: *default
   database: bookshore_development
+  username: postgres
+  password: postgres
+  host: localhost
 
 test:
   <<: *default
   database: bookshore_test
+  username: postgres
+  password: postgres
+  host: localhost
 
 production:
   primary: &primary_production
     <<: *default
-    database: <%= ENV["BOOKSHORE_DATABASE_NAME"] %>
-    username: <%= ENV["BOOKSHORE_DATABASE_USER"] %>
-    password: <%= ENV["BOOKSHORE_DATABASE_PASSWORD"] %>
-    host: <%= ENV["BOOKSHORE_DATABASE_HOST"] %>
-    port: <%= ENV["BOOKSHORE_DATABASE_PORT"] %>
+    database: <%= ENV["BOOKSHORE_DATABASE_NAME"] || "bookshore_prod" %>
+    username: <%= ENV["BOOKSHORE_DATABASE_USER"] || "postgres" %>
+    password: <%= ENV["BOOKSHORE_DATABASE_PASSWORD"] || "postgres" %>
+    host: <%= ENV["BOOKSHORE_DATABASE_HOST"] || "localhost" %>
+    port: <%= ENV["BOOKSHORE_DATABASE_PORT"] || 5432 %>
 
   cache:
     <<: *primary_production
-    database: <%= ENV.fetch("BOOKSHORE_DATABASE_NAME_CACHE", "#{ENV["BOOKSHORE_DATABASE_NAME"]}_cache") %>
+    database: <%= ENV["BOOKSHORE_DATABASE_NAME_CACHE"] || "#{ENV["BOOKSHORE_DATABASE_NAME"] || "bookshore_prod"}_cache" %>
     migrations_paths: db/cache_migrate
 
   queue:
     <<: *primary_production
-    database: <%= ENV.fetch("BOOKSHORE_DATABASE_NAME_QUEUE", "#{ENV["BOOKSHORE_DATABASE_NAME"]}_queue") %>
+    database: <%= ENV["BOOKSHORE_DATABASE_NAME_QUEUE"] || "#{ENV["BOOKSHORE_DATABASE_NAME"] || "bookshore_prod"}_queue" %>
     migrations_paths: db/queue_migrate
 
   cable:
     <<: *primary_production
-    database: <%= ENV.fetch("BOOKSHORE_DATABASE_NAME_CABLE", "#{ENV["BOOKSHORE_DATABASE_NAME"]}_cable") %>
+    database: <%= ENV["BOOKSHORE_DATABASE_NAME_CABLE"] || "#{ENV["BOOKSHORE_DATABASE_NAME"] || "bookshore_prod"}_cable" %>
     migrations_paths: db/cable_migrate

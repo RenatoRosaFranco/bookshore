@@ -28,11 +28,11 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: <%= ENV.fetch("BOOKSHORE_DATABASE_NAME") %>
-    username: <%= ENV.fetch("BOOKSHORE_DATABASE_USER") %>
-    password: <%= ENV.fetch("BOOKSHORE_DATABASE_PASSWORD") %>
-    host: <%= ENV.fetch("BOOKSHORE_DATABASE_HOST") %>
-    port: <%= ENV.fetch("BOOKSHORE_DATABASE_PORT", 5432) %>
+    database: <%= ENV["BOOKSHORE_DATABASE_NAME"] %>
+    username: <%= ENV["BOOKSHORE_DATABASE_USER"] %>
+    password: <%= ENV["BOOKSHORE_DATABASE_PASSWORD"] %>
+    host: <%= ENV["BOOKSHORE_DATABASE_HOST"] %>
+    port: <%= ENV["BOOKSHORE_DATABASE_PORT"] %>
 
   cache:
     <<: *primary_production

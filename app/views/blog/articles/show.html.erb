@@ -1,0 +1,98 @@
+<% content_for :breadcrumb do %>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item">
+        <%= link_to "Home" , root_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to "Notícias" , blog_articles_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <%= @article.title.truncate(30) %>
+      </li>
+    </ol>
+  </nav>
+  <% end %>
+
+
+<% article_url=request.original_url %>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class=" rounded-4 border-0" style="border: none !important;">
+          <img src="<%= 'https://placehold.co/900x300?text=Imagem+de+Capa' %>"
+            class="card-img-top rounded-top-4" alt="Capa do artigo">
+
+          <div class="card-body mt-4">
+            <h1 class="card-title display-5 fw-bold mb-3 text-center">
+              <%= @article.title %>
+            </h1>
+
+            <p class="text-muted text-center">
+              Publicado <strong>
+                <%= time_ago_in_words(@article.created_at) %>
+              </strong> atrás –
+              Tempo estimado de leitura: <strong>
+                <%= reading_time(@article.content) %></strong>
+            </p>
+
+            <% if @article.tags.present? %>
+              <div class="mb-3 text-center">
+                <% @article.tags.split(',').each do |tag| %>
+                  <span class="badge bg-primary me-1">
+                    <%= tag.strip %>
+                  </span>
+                  <% end %>
+              </div>
+              <% end %>
+
+                <div class="card-text fs-5 lh-lg mb-4">
+                  <%= simple_format(@article.content) %>
+                </div>
+
+                <div class="d-flex align-items-center gap-3 mb-4">
+                  <strong>Compartilhar:</strong>
+
+                  <a href="https://twitter.com/intent/tweet?url=<%= CGI.escape(article_url) %>&text=<%= CGI.escape(@article.title) %>"
+                    class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">
+                    <i class="fab fa-twitter me-1"></i> Twitter
+                  </a>
+
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=<%= CGI.escape(article_url) %>"
+                    class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">
+                    <i class="fab fa-facebook me-1"></i> Facebook
+                  </a>
+
+                  <a href="https://wa.me/?text=<%= CGI.escape(@article.title + ' - ' + article_url) %>"
+                    class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp me-1"></i> WhatsApp
+                  </a>
+
+                  <a href="https://t.me/share/url?url=<%= CGI.escape(article_url) %>&text=<%= CGI.escape(@article.title) %>"
+                    class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">
+                    <i class="fab fa-telegram me-1"></i> Telegram
+                  </a>
+                </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center mt-5">
+          <img src="https://placehold.co/80x80?text=Autor" class="rounded-circle me-3" alt="Avatar do autor">
+          <div>
+            <h6 class="bold fw-bold">Renato Franco</h6>
+            <h6 class="mb-0">
+              <%= @article.user.email %>
+            </h6>
+            <small class="text-muted">Membro desde janeiro de 2023</small><br />
+            <span class="badge bg-secondary mt-1">ADMIN</span>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <%= link_to "← Voltar" , blog_articles_path,
+          class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>

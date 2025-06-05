@@ -1,0 +1,12 @@
+<% content_for :breadcrumb do %>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item">
+        <%= link_to "Home" , root_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to "Ingressos" , tickets_path %>
+      </li>
+    </ol>
+  </nav>
+  <% end %>

@@ -1,0 +1,20 @@
+<div class="bg-white shadow-md rounded-lg overflow-hidden transition hover:shadow-xl flex flex-col h-full mb-4">
+    <%= image_tag("https://placehold.co/380x200?text=Imagem+de+Capa" ,
+      class: "w-48 h-48 object-cover" , alt: "Capa do artigo"
+    ) %>
+
+    <div class="pt-3 flex flex-col flex-1">
+      <h4 class="fw-bold text-xl font-semibold text-gray-900 mb-2 leading-snug">
+        <%= link_to article.title, blog_article_path(article),
+        class: "text-decoration-none text-gray-900 hover:text-gray-700"
+          %>
+      </h4>
+
+      <p class="text-gray-600 text-sm mb-4 flex-1 mt-3">
+        <%= truncate(strip_tags(article.content.to_s), length: 90) %>
+      </p>
+
+      <%= link_to "Leia mais →" , blog_article_path(article),
+        class: "mt-auto text-sm text-gray-600 hover:text-gray-800 no-underline" %>
+    </div>
+</div>

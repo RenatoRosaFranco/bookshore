@@ -18,10 +18,17 @@
 
 FactoryBot.define do
   factory :article do
-    cover_url { "MyString" }
-    title { "MyString" }
-    content { "MyText" }
-    tags { "MyString" }
-    user { nil }
+    title { FFaker::Book.title }
+    content { FFaker::Lorem.paragraphs.join("\n\n") }
+    tags { Array.new(3) { FFaker::Lorem.word }.uniq }
+    user
+
+    after(:build) do |article|
+      article.cover.attach(
+        io: File.open(Rails.root.join('spec', 'support', 'assets', 'sample.jpeg')),
+        filename: 'sample.jpeg',
+        content_type: 'image/jpeg'
+      ) if article.respond_to?(:cover) && article.cover.blank?
+    end
   end
 end

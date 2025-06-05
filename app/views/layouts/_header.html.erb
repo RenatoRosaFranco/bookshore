@@ -1,0 +1,65 @@
+<header id="header">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container container-fluid">
+      <%= link_to "Oktoberfest Missões" , root_path, class: "navbar-brand fw-bold" %>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+          aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-start" id="navbarMain">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to "Home" , root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Programação" , schedule_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Soberanas" , queens_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Shows" , shows_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Ingressos" , tickets_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Notícias" , blog_articles_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Contato" , contact_path, class: "nav-link" %>
+            </li>
+          </ul>
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to "LGPD" , blog_articles_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Regulamentos" , "#" , class: "nav-link" %>
+            </li>
+            <% if !current_user %>
+              <li class="nav-item">
+                <%= link_to "Entrar" , new_user_session_path, class: "nav-link" %>
+              </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "Sair" , destroy_user_session_path, method: :delete, class: "nav-link" %>
+                </li>
+                <% end %>
+          </ul>
+        </div>
+    </div>
+  </nav>
+
+  <%# Seção do breadcrumb %>
+    <div class="bg-light border-bottom py-2">
+      <div class="container">
+        <%= yield :breadcrumb %>
+      </div>
+    </div>
+</header>

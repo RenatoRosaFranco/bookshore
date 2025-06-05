@@ -1,0 +1,37 @@
+<% content_for :breadcrumb do %>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item">
+        <%= link_to "Home" , root_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to "Notícias" , blog_articles_path %>
+      </li>
+    </ol>
+  </nav>
+<% end %>
+
+<div class="container my-5">
+  <h1 class="mb-0 fw-bold fs-2">Artigos</h1>
+  <p class="mb-4">Acompanhe os ultimos artigos publicados.</p>
+  <br />
+
+  <% if @articles.any? %>
+    <div class="row g-4">
+      <% @articles.each do |article| %>
+        <div class="col-md-4">
+          <%= render partial: 'article' , locals: { article: article } %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center text-muted py-5 fs-5">
+      Nenhum artigo disponível no momento.
+    </div>
+  <% end %>
+
+  <br />
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @articles %>
+  </div>
+</div>

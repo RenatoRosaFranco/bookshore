@@ -1,0 +1,35 @@
+<%= form_for(@contact, url: contact_path, method: :post) do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, "Nome" , class: "form-label fw-bold" %>
+    <%= f.text_field :name, class: "form-control" , required: true,
+    placeholder: 'Digite o nome' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :email, "Email" , class: "form-label fw-bold" %>
+    <%= f.email_field :email, class: "form-control" , required: true,
+    placeholder: 'Digite o e-mail' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :phone, "Telefone" , class: "form-label fw-bold" %>
+    <%= f.telephone_field :phone, class: "form-control",
+    placeholder: 'Digite o telefone' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :subject, "Assunto" , class: "form-label fw-bold" %>
+    <%= f.text_field :subject, class: "form-control" , required: true,
+    placeholder: 'Digite o assunto' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :message, "Mensagem" , class: "form-label fw-bold" %>
+    <%= f.text_area :message, class: "form-control" , rows: 5, required: true,
+    placeholder: 'Digite a mensagem' %>
+  </div>
+
+  <div class="text-end">
+    <%= f.submit "Enviar" , class: "btn btn-primary btn-lg" %>
+  </div>
+  <% end %>
